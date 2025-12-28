@@ -1,0 +1,7 @@
+﻿@BasicXCloneAPI_HostAddress = http://localhost:5225
+
+GET {{BasicXCloneAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
