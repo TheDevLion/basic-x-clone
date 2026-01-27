@@ -1,4 +1,3 @@
-﻿# Rodrigo Cezar Leao
 basic-x-clone is a lightweight social feed where users can pick a profile, publish short posts, repost existing content, filter by keywords, and browse the timeline sorted by date or trend with infinite scrolling.
 
 ## Frontend App
