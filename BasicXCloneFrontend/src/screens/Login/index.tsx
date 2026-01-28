@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { fetchUsers } from "../../services/UserService";
 import { User } from "../../models/User";
-import { LoginContainer, UsersContainer } from "./styles";
+import { LoadingText, LoginContainer, UsersContainer } from "./styles";
 import { SESSION_STORAGE_USER_KEY } from "../../constants";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     /*====================== STATES ======================*/
     const [users, setUsers] = useState<User[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -17,9 +18,14 @@ export const Login = () => {
     }, [])
 
     /*====================== FETCHES ======================*/
-    const fetchData = () => {
-        fetchUsers()
-            .then((response: User[]) => setUsers(response))
+    const fetchData = async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetchUsers();
+            setUsers(response);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     
@@ -33,14 +39,18 @@ export const Login = () => {
     return <LoginContainer>
         <h1>Select the user</h1>
         <UsersContainer>
-            {users.map((u: User) => {
-                return <button 
-                        key={u.userName}
-                        onClick={() => handleClick(u)}
-                    >
-                        {u.userName}
-                    </button>
-            })}
+            {isLoading ? (
+                <LoadingText>Loading users...</LoadingText>
+            ) : (
+                users.map((u: User) => {
+                    return <button 
+                            key={u.userName}
+                            onClick={() => handleClick(u)}
+                        >
+                            {u.userName}
+                        </button>
+                })
+            )}
         </UsersContainer>
     </LoginContainer>
 }
