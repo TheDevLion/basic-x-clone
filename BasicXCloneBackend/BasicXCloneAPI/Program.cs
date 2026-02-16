@@ -105,6 +105,31 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/healthz", async (AppDbContext dbContext, CancellationToken cancellationToken) =>
+{
+    var canConnect = await dbContext.Database.CanConnectAsync(cancellationToken);
+    if (canConnect)
+    {
+        return Results.Ok(new
+        {
+            status = "ok",
+            api = "ok",
+            db = "ok",
+            timestamp = DateTime.UtcNow
+        });
+    }
+
+    return Results.Json(
+        new
+        {
+            status = "degraded",
+            api = "ok",
+            db = "unavailable",
+            timestamp = DateTime.UtcNow
+        },
+        statusCode: StatusCodes.Status503ServiceUnavailable);
+});
+
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
