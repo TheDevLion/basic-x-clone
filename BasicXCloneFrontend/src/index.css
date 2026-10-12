@@ -1,66 +1,76 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: #edf5ff;
+  background: #080d14;
+  color-scheme: dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-a:hover {
-  color: #535bf2;
+
+html {
+  min-height: 100%;
+  background: #080d14;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: radial-gradient(circle at top, #16283b 0, #0b121d 42rem, #080d14 100%);
+  color: #edf5ff;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  border: 1px solid #2d7c8b;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  color: #dcfbff;
+  background: #12323d;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+button:hover {
+  border-color: #75e7f7;
+  background: #174957;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #75e7f7;
+  outline-offset: 2px;
+}
+
+input,
+textarea {
+  color: #edf5ff;
+  background: #0e1823;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8ea3b8;
+  opacity: 1;
 }
